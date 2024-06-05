@@ -1,0 +1,26 @@
+cabal-version: 3.8
+name:          simple
+version:       0.1.0.0
+
+flag dev
+  default: True
+  manual:  False
+
+flag release
+  default: False
+  manual:  True
+
+common common
+  default-language:   GHC2021
+  build-depends:      base ^>=4.18
+
+  if flag(release)
+    ghc-options: -O1
+
+  if flag(dev)
+    ghc-options: -O0
+
+executable simple-bin
+  import:         common
+  hs-source-dirs: src
+  main-is:        Main.hs
